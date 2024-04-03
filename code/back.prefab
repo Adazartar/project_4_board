@@ -1,0 +1,27 @@
+{
+  "RootObject": {
+    "__guid": "fed2d5f4-5357-4444-9055-1d9189dfd962",
+    "Name": "back",
+    "Scale": "5,5,1",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "ModelRenderer",
+        "__guid": "7954a214-a771-415b-aa56-dc4c4c415e80",
+        "BodyGroups": 18446744073709551615,
+        "MaterialOverride": "materials/default.vmat",
+        "Model": "models/dev/plane.vmdl",
+        "RenderType": "Off",
+        "Tint": "0.59535,0.52058,0.52058,1"
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

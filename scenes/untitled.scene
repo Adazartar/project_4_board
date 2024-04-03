@@ -1,0 +1,125 @@
+{
+  "__guid": "6d7fe0b5-58f3-439d-ae11-7c42f5b4c62b",
+  "GameObjects": [
+    {
+      "__guid": "107b341b-2635-4fee-a9f7-2a9e16e115ea",
+      "Name": "Main Camera",
+      "Position": "0,0,400",
+      "Rotation": "-0.5,0.5,0.5,0.5",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "CameraComponent",
+          "__guid": "d4c5ab74-cd1b-48ae-bc9d-cebeccdc6194",
+          "BackgroundColor": "0.33333,0.46275,0.52157,1",
+          "ClearFlags": "All",
+          "FieldOfView": 60,
+          "IsMainCamera": true,
+          "Orthographic": false,
+          "OrthographicHeight": 0,
+          "Priority": 1,
+          "RenderExcludeTags": "",
+          "RenderTags": "",
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 10000,
+          "ZNear": 10
+        }
+      ]
+    },
+    {
+      "__guid": "11e2a177-457f-42a4-acb9-8ce5887b117d",
+      "Name": "Directional Light",
+      "Position": "0,0,200",
+      "Rotation": "0.00000006067857,0.7071068,-0.00000006067857,0.7071068",
+      "Tags": "light_directional,light",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "DirectionalLight",
+          "__guid": "219f2087-4018-4261-8667-05a2c44f6959",
+          "FogMode": "WithoutShadows",
+          "FogStrength": 1,
+          "LightColor": "0.91373,0.98039,1,1",
+          "Shadows": false,
+          "SkyColor": "0.05882,0.07451,0.08235,1"
+        }
+      ]
+    },
+    {
+      "__guid": "2e945687-bba7-41c1-ac12-adf0a1aeddca",
+      "Name": "board",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "Board",
+          "__guid": "c73361e5-24f6-406b-a403-f72355383fbe",
+          "back_piece": {
+            "_type": "gameobject",
+            "prefab": "code/back.prefab"
+          },
+          "board_z": 1,
+          "cell_piece": {
+            "_type": "gameobject",
+            "prefab": "code/cell.prefab"
+          },
+          "cell_z": 100,
+          "columns": 4,
+          "gap": 12,
+          "rows": 6
+        }
+      ]
+    },
+    {
+      "__guid": "ee492e28-9adf-433b-82d1-c64e1964291b",
+      "Name": "AllowMouse",
+      "Position": "5.423047,-200.4788,517.2018",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "ScreenPanel",
+          "__guid": "db0ba068-bbcf-40e9-953f-2a403680fe0e",
+          "AutoScreenScale": true,
+          "Opacity": 1,
+          "Scale": 1,
+          "ZIndex": 100
+        },
+        {
+          "__type": "AllowMouseShow",
+          "__guid": "0c3025d9-554a-4aa2-88a8-2e178ef1cb96"
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "Lerping": true,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 30,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true,
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "Title": "untitled",
+  "Description": "",
+  "LastSaved": "2024-04-03T11:18:19.9440579\u002B11:00",
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

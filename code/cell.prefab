@@ -1,0 +1,42 @@
+{
+  "RootObject": {
+    "__guid": "d91d4215-be26-420f-b21e-1d9a212d3e6c",
+    "Name": "cell",
+    "Scale": "0.1,0.1,1",
+    "Tags": "cell",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "ModelRenderer",
+        "__guid": "557b0507-1ee8-4d9d-ac68-6bcb9b42569d",
+        "BodyGroups": 18446744073709551615,
+        "MaterialOverride": "materials/default.vmat",
+        "Model": "models/dev/plane.vmdl",
+        "RenderType": "Off",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Cell",
+        "__guid": "53a026dd-6e28-47d6-815d-c0a9f58eb545",
+        "column_id": -1,
+        "row_id": -1
+      },
+      {
+        "__type": "PlaneCollider",
+        "__guid": "6ff893dc-4379-484b-a872-e41a7c96207a",
+        "Center": "0,0,0",
+        "IsTrigger": true,
+        "Scale": "100,100",
+        "Static": true
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}
