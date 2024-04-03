@@ -1,19 +1,28 @@
 {
   "RootObject": {
-    "__guid": "fed2d5f4-5357-4444-9055-1d9189dfd962",
+    "__guid": "ec317500-5858-4a90-94a5-27dff30ff031",
     "Name": "back",
     "Scale": "5,5,1",
+    "Tags": "back",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "ModelRenderer",
-        "__guid": "7954a214-a771-415b-aa56-dc4c4c415e80",
+        "__guid": "aa7d1fcc-d5d7-4f32-a77f-4a1a69645124",
         "BodyGroups": 18446744073709551615,
         "MaterialOverride": "materials/default.vmat",
         "Model": "models/dev/plane.vmdl",
         "RenderType": "Off",
         "Tint": "0.59535,0.52058,0.52058,1"
+      },
+      {
+        "__type": "PlaneCollider",
+        "__guid": "df06c41e-b33d-46b3-a835-f62dee3626ea",
+        "Center": "0,0,0",
+        "IsTrigger": true,
+        "Scale": "100,100",
+        "Static": true
       }
     ],
     "Children": []
