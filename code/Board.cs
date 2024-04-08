@@ -10,13 +10,16 @@ public sealed class Board : Component
 	[Property] float board_z = 1;
 	[Property] float cell_z = 2;
 
-	GameObject active_cell = null;
-	GameObject selected_cell = null;
+	Cell active_cell = null;
+	Cell selected_cell = null;
 
-	Dictionary<(int, int), GameObject> cells = new Dictionary<(int, int), GameObject>();
+	[Property] Unit unit;
+
+	public Dictionary<(int, int), Cell> cells = new Dictionary<(int, int), Cell>();
 	protected override void OnStart()
 	{
 		CreateBoard();
+		InitialiseUnits();
 	}
 	
 	protected override void OnUpdate()
@@ -31,37 +34,29 @@ public sealed class Board : Component
 		for(int i = 0; i < rows; i++){
 			for(int j = 0; j < columns; j++){
 				GameObject new_cell = cell_piece.Clone(new Vector3(starting_point.x + j * gap, starting_point.y + i * gap, starting_point.z));
-				new_cell.Components.Get<Cell>().SetID(i, j);
-				cells[(i, j)] = new_cell;
+				Cell cell_component = new_cell.Components.Get<Cell>();
+				cell_component.SetID(i, j);
+				cells[(i, j)] = cell_component;
 			}
 		}
 	}
 
-	public void SetCellRed(int row, int column){
-		Color red = new Color();
-		red.r = 1;
-		red.a = 1;
-		cells[(row, column)].Components.Get<ModelRenderer>().Tint = red;
-	}
-
-	public void SetCellGreen(int row, int column){
-		Color green = new Color();
-		green.g = 1;
-		green.a = 1;
-		cells[(row, column)].Components.Get<ModelRenderer>().Tint = green;
+	public void InitialiseUnits()
+	{
+		cells[(unit.start_row, unit.start_column)].UnitToCell(unit);
 	}
 
 	public void HoverCells(){
 		var ray = Scene.Trace.Ray((Scene.Camera.ScreenPixelToRay(Mouse.Position)), 1000f).WithAnyTags(["cell","back"]).HitTriggersOnly().Run();
-		if(ray.Hit && ray.GameObject.Tags.Has("cell") && ray.GameObject != active_cell){
-			if(active_cell == null) active_cell = ray.GameObject;		
-			active_cell.Components.Get<Cell>().Unhover();
-			active_cell = ray.GameObject;
-			active_cell.Components.Get<Cell>().Hover();
+		if(ray.Hit && ray.GameObject.Tags.Has("cell") && ((active_cell == null) || (ray.GameObject != active_cell.GameObject))){
+			if(active_cell == null) active_cell = ray.GameObject.Components.Get<Cell>();		
+			active_cell.Unhover();
+			active_cell = ray.GameObject.Components.Get<Cell>();
+			active_cell.Hover();
 		}
 		else if(ray.Hit && ray.GameObject.Tags.Has("back")){
 			if(active_cell == null) return;
-			active_cell.Components.Get<Cell>().Unhover();
+			active_cell.Unhover();
 			active_cell = null;
 		}
 	}
@@ -69,14 +64,14 @@ public sealed class Board : Component
 	public void SelectCells(){
 		if(Input.Down("interact")){
 			if(active_cell != null){
-				active_cell.Components.Get<Cell>().Select();
-				if(selected_cell != null) selected_cell.Components.Get<Cell>().Unselect();
+				active_cell.Select();
+				if(selected_cell != null) selected_cell.Unselect();
 				selected_cell = active_cell;
-				selected_cell.Components.Get<Cell>().Select();
+				selected_cell.Select();
 			}
 			else{
 				if(selected_cell != null){
-					selected_cell.Components.Get<Cell>().Unselect();
+					selected_cell.Unselect();
 					selected_cell = null;
 				}
 			}

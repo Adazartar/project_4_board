@@ -9,6 +9,7 @@ public sealed class Cell : Component
 	Color base_color;
 	bool hovered = false;
 	bool selected = false;
+	public List<Unit> units = new List<Unit>();
 
 	protected override void OnStart()
 	{
@@ -18,6 +19,12 @@ public sealed class Cell : Component
 	protected override void OnUpdate()
 	{
 
+	}
+
+	public void UnitToCell(Unit unit)
+	{
+		unit.GameObject.Transform.Position = Transform.Position;
+		units.Add(unit);
 	}
 
 	public void SetID(int row, int column){

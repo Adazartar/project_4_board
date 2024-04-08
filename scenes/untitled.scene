@@ -69,7 +69,13 @@
           "cell_z": 100,
           "columns": 4,
           "gap": 12,
-          "rows": 6
+          "rows": 4,
+          "unit": {
+            "_type": "component",
+            "component_id": "4489063b-edd5-4837-9261-a9279cfac762",
+            "go": "116dfad3-00ff-4861-8e2b-4a8c72a3c8af",
+            "component_type": "Unit"
+          }
         }
       ]
     },
@@ -91,6 +97,37 @@
         {
           "__type": "AllowMouseShow",
           "__guid": "0c3025d9-554a-4aa2-88a8-2e178ef1cb96"
+        }
+      ]
+    },
+    {
+      "__guid": "116dfad3-00ff-4861-8e2b-4a8c72a3c8af",
+      "Name": "SampleUnit",
+      "Position": "6.2045,-243.0461,510.3101",
+      "Scale": "0.1,0.1,0.1",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "ModelRenderer",
+          "__guid": "e926d5fc-95df-444b-9faa-8674027ac465",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/dev/sphere.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Unit",
+          "__guid": "4489063b-edd5-4837-9261-a9279cfac762",
+          "board": {
+            "_type": "component",
+            "component_id": "c73361e5-24f6-406b-a403-f72355383fbe",
+            "go": "2e945687-bba7-41c1-ac12-adf0a1aeddca",
+            "component_type": "Board"
+          },
+          "start_column": 0,
+          "start_row": 0,
+          "total_energy": 0
         }
       ]
     }
@@ -118,7 +155,7 @@
   },
   "Title": "untitled",
   "Description": "",
-  "LastSaved": "2024-04-03T15:11:39.2374288\u002B11:00",
+  "LastSaved": "2024-04-08T22:12:20.0959758\u002B10:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
