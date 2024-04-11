@@ -1,4 +1,5 @@
 using Sandbox;
+using System;
 
 public sealed class Board : Component
 {
@@ -65,7 +66,8 @@ public sealed class Board : Component
 		if(Input.Down("interact")){
 			if(active_cell != null){
 				active_cell.Select();
-				if(selected_cell != null) selected_cell.Unselect();
+				// if(selected_cell != null) selected_cell.Unselect();
+				if(selected_cell != null) DrawLine(active_cell, selected_cell);
 				selected_cell = active_cell;
 				selected_cell.Select();
 			}
@@ -76,5 +78,36 @@ public sealed class Board : Component
 				}
 			}
 		}
+	}
+
+	public void DrawLine(Cell start_cell, Cell end_cell){
+		int x0 = start_cell.row_id;
+		int y0 = start_cell.column_id;
+		int x1 = end_cell.row_id;
+		int y1 = end_cell.column_id;
+		int dx = Math.Abs(x1 - x0);
+        int dy = Math.Abs(y1 - y0);
+        int sx = x0 < x1 ? 1 : -1;
+        int sy = y0 < y1 ? 1 : -1;
+        int err = dx - dy;
+
+        while (true)
+        {
+			cells[(x0, y0)].SetCellRed();
+            if (x0 == x1 && y0 == y1)
+                break;
+
+            int e2 = 2 * err;
+            if (e2 > -dy)
+            {
+                err -= dy;
+                x0 += sx;
+            }
+            if (e2 < dx)
+            {
+                err += dx;
+                y0 += sy;
+            }
+        }
 	}
 }

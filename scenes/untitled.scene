@@ -10,7 +10,7 @@
       "NetworkMode": 2,
       "Components": [
         {
-          "__type": "CameraComponent",
+          "__type": "Sandbox.CameraComponent",
           "__guid": "d4c5ab74-cd1b-48ae-bc9d-cebeccdc6194",
           "BackgroundColor": "0.33333,0.46275,0.52157,1",
           "ClearFlags": "All",
@@ -38,7 +38,7 @@
       "NetworkMode": 2,
       "Components": [
         {
-          "__type": "DirectionalLight",
+          "__type": "Sandbox.DirectionalLight",
           "__guid": "219f2087-4018-4261-8667-05a2c44f6959",
           "FogMode": "WithoutShadows",
           "FogStrength": 1,
@@ -67,9 +67,9 @@
             "prefab": "code/cell.prefab"
           },
           "cell_z": 100,
-          "columns": 4,
+          "columns": 10,
           "gap": 12,
-          "rows": 4,
+          "rows": 10,
           "unit": {
             "_type": "component",
             "component_id": "4489063b-edd5-4837-9261-a9279cfac762",
@@ -87,7 +87,7 @@
       "NetworkMode": 2,
       "Components": [
         {
-          "__type": "ScreenPanel",
+          "__type": "Sandbox.ScreenPanel",
           "__guid": "db0ba068-bbcf-40e9-953f-2a403680fe0e",
           "AutoScreenScale": true,
           "Opacity": 1,
@@ -109,7 +109,7 @@
       "NetworkMode": 2,
       "Components": [
         {
-          "__type": "ModelRenderer",
+          "__type": "Sandbox.ModelRenderer",
           "__guid": "e926d5fc-95df-444b-9faa-8674027ac465",
           "BodyGroups": 18446744073709551615,
           "Model": "models/dev/sphere.vmdl",
@@ -155,7 +155,7 @@
   },
   "Title": "untitled",
   "Description": "",
-  "LastSaved": "2024-04-08T22:12:20.0959758\u002B10:00",
+  "LastSaved": "2024-04-11T20:27:36.862762\u002B10:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

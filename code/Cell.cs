@@ -2,8 +2,8 @@ using Sandbox;
 
 public sealed class Cell : Component
 {
-	[Property] int row_id = -1;
-	[Property] int column_id = -1;
+	[Property] public int row_id = -1;
+	[Property] public int column_id = -1;
 
 	ModelRenderer model;
 	Color base_color;
@@ -74,6 +74,13 @@ public sealed class Cell : Component
 		green.g = 1;
 		green.a = 1;
 		model.Tint = green;
+	}
+
+	public void SetCellRed(){
+		Color red = new Color();
+		red.r = 1;
+		red.a = 1;
+		model.Tint = red;
 	}
 
 }
