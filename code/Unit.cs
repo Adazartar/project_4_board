@@ -2,6 +2,8 @@ using Sandbox;
 using System;
 public sealed class Unit : Component
 {
+	public string name = "Test Unit";
+	public string description = "Just a basic test unit, can do basic things like move and attack";
 	[Property] float total_energy;
 	float current_energy_used;
 	[Property] public int start_x = 3;
@@ -10,39 +12,86 @@ public sealed class Unit : Component
 	public int x = 3;
 	public int y = 3;
 	public Board board;
+	public Cell cell;
+
+	public List<TurnAction> curr_turn = new List<TurnAction>();
 
 	bool used_move = false;
 
+	public List<(Action, string, string)> options;
+
 	protected override void OnStart()
 	{
-
+		InitialiseFunctions();
 	}
 	protected override void OnUpdate()
 	{
 		if(!used_move){
 			Move();
+			EndTurn();
 			used_move = true;
 		}
+	}
+
+	public void InitialiseFunctions()
+	{
+		Action display_move = DisplayMove;
+		Action display_attack = DisplayAttack;
+ 		options = new List<(Action, string, string)>{
+			(display_move, "Move", "Basic move, will move the unit 1 distance in any direction"),
+			(display_attack, "Stab", "Basic attack, will attack in 1 range in any direction")
+		};
+	}
+
+	public void DisplayMove()
+	{
+		Log.Info("displaying move");
+		board.SetRangeIndicators(GetWeightedDiagonalCells(3));
+	}
+
+	public void DisplayAttack()
+	{
+		Log.Info("displaying attack");
+		
 	}
 
 	public void Move()
 	{
 		TurnAction move = () => 
 		{
-			Log.Info("testing move");
+			cell.LeaveCell(this);
+			board.cells[(1,1)].MoveToCell(this);
 		};
 
-		board.AddAction(move);
+		curr_turn.Add(move);
 	}
+	
+	public void Attack()
+	{
+		TurnAction move = () => 
+		{
+			cell.LeaveCell(this);
+			board.cells[(1,1)].MoveToCell(this);
+		};
+
+		curr_turn.Add(move);
+	}
+
+	public void EndTurn()
+	{
+		board.AddActions(curr_turn);
+	}
+
+
 
 	public List<(int, int)> GetWeightedDiagonalCells(int range){
 		List<(int, int)> cells = new List<(int, int)>();
 		for(int x_trans = 0; x_trans <= range; x_trans++){
 			for(int y_trans = 0; y_trans <= range; y_trans++){
-				if(GetWeightedDiagonalLength(DrawLine(0, 0, x_trans, y_trans)) <= range){
+				if(GetWeightedDiagonalLength(DrawLine(0, 0, x_trans, y_trans)) <= range && !(x_trans == 0 && y_trans == 0)){
 					cells.Add((x + x_trans, y + y_trans)); 
-					cells.Add((x + x_trans, y -y_trans));
-					cells.Add((x -x_trans, y + y_trans)); 
+					cells.Add((x + x_trans, y - y_trans));
+					cells.Add((x - x_trans, y + y_trans)); 
 					cells.Add((x -x_trans, y - y_trans));
 				}
 			}

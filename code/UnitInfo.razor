@@ -1,0 +1,70 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+
+<root>
+	<div class="unit_info">
+		<div class="container">
+			@if (board.selected_cell != null && curr_unit == null) {
+				@foreach (var unit in board.selected_cell.units){
+					<div class="unit" onclick=@(() => ShowMoveList(unit))>
+						<div class ="name">@unit.name</div>
+						<div class="description">@unit.description</div>
+					</div>
+				}
+			}
+
+			@if (board.selected_cell != null && curr_unit != null) {
+				@foreach (var (option, name, description) in curr_unit.options) {
+					<div class="move">
+						@name
+					</div>
+				}
+			}
+		</div>
+
+		<div class="overlay-container">
+			@if (board.selected_cell != null && curr_unit != null) {
+				@foreach (var (option, name, description) in curr_unit.options) {
+					<div class="overlay-move" onmouseover=@(() => 
+						{
+							option();
+							move_text = description;
+						}) onmouseout=@(() => board.UnsetRangeIndicators())>
+
+					</div>
+				}
+			}
+		</div>
+	</div>
+	<div class="move_info">
+		@if(curr_unit != null){
+			<div class="description">@move_text</div>
+		}
+	</div>
+</root>
+
+@code
+{
+	[Property] Board board;
+	Unit curr_unit = null;
+	string move_text = "";
+	
+	protected override void OnUpdate(){
+		if(board.selected_cell == null || !board.selected_cell.units.Contains(curr_unit)) curr_unit = null;
+	}
+
+	public void ShowMoveList(Unit unit){
+		Log.Info("showing move list");
+		curr_unit = unit;
+	}
+
+
+	public void Test()
+	{
+		Log.Info("test function");
+	}
+
+
+	protected override int BuildHash() => System.HashCode.Combine(board.selected_cell, curr_unit);
+}

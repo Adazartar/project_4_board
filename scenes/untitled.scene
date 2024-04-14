@@ -90,7 +90,7 @@
           "AutoScreenScale": true,
           "Opacity": 1,
           "Scale": 1,
-          "ZIndex": 100
+          "ZIndex": 105
         },
         {
           "__type": "AllowMouseShow",
@@ -108,7 +108,7 @@
         {
           "__guid": "116dfad3-00ff-4861-8e2b-4a8c72a3c8af",
           "Name": "SampleUnit",
-          "Position": "0.00003623962,-0.00006103516,0",
+          "Position": "0,0,0",
           "Scale": "0.1,0.1,0.1",
           "Enabled": true,
           "NetworkMode": 2,
@@ -129,6 +129,33 @@
               "total_energy": 0
             }
           ]
+        }
+      ]
+    },
+    {
+      "__guid": "cf7da404-1d23-4189-8b09-f50bb13a86ee",
+      "Name": "UnitInfo",
+      "Position": "6.204464,-243.046,510.3101",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "Sandbox.ScreenPanel",
+          "__guid": "e35088de-d332-4d00-ab55-c13f38dd6799",
+          "AutoScreenScale": true,
+          "Opacity": 1,
+          "Scale": 1,
+          "ZIndex": 100
+        },
+        {
+          "__type": "UnitInfo",
+          "__guid": "5e469318-a1e3-4fc1-acf4-551b6f5742b2",
+          "board": {
+            "_type": "component",
+            "component_id": "c73361e5-24f6-406b-a403-f72355383fbe",
+            "go": "2e945687-bba7-41c1-ac12-adf0a1aeddca",
+            "component_type": "Board"
+          }
         }
       ]
     }
@@ -156,7 +183,7 @@
   },
   "Title": "untitled",
   "Description": "",
-  "LastSaved": "2024-04-14T12:23:58.7012835\u002B10:00",
+  "LastSaved": "2024-04-14T18:04:57.043793\u002B10:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

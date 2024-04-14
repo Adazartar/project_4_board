@@ -1,0 +1,115 @@
+UnitInfo {
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+
+	.unit_info{
+		position: absolute;
+		right: 0;
+		width: 30%;
+		height: 100%;
+		background-color: #444;
+		font-weight: bold;
+		border-radius: 20px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 20px; /* Add padding for spacing */
+
+		.container {
+			position: relative;
+			pointer-events: all;
+			font-size: 25px;
+			font-family: Poppins;
+			color: #fff;
+			flex-direction: column;
+
+			.unit {
+				text-align: center;
+				flex-direction: column;
+				border-radius: 20px;
+				width: 500px;
+				height: 200px;
+				border: 1px solid #fff; /* Add solid border */
+				margin-bottom: 10px; /* Add margin between units */
+				padding: 10px; /* Add padding for spacing */
+				background-color: green;
+
+				.name {
+					//background-color: yellow;
+					font-weight: bold;
+					margin-bottom: 5px; /* Add margin below the name */
+				}
+
+				.description {
+					//background-color: blue;
+					margin-top: 5px; /* Add margin above the description */
+				}
+			}
+
+			.move {
+				text-align: center;
+				flex-direction: column;
+				border-radius: 20px;
+				width: 500px;
+				height: 70px;
+				border: 1px solid #fff; /* Add solid border */
+				margin-bottom: 10px; /* Add margin between units */
+				padding: 10px; /* Add padding for spacing */
+				background-color: green;
+			}
+		}
+
+		.overlay-container {
+			position: absolute;
+			top: 25;
+			right: 35;
+			pointer-events: all;
+			font-size: 25px;
+			font-family: Poppins;
+			color: #fff;
+			flex-direction: column;
+
+			.overlay-move {
+				text-align: center;
+				flex-direction: column;
+				border-radius: 20px;
+				width: 500px;
+				height: 70px;
+				border: 1px solid #fff; /* Add solid border */
+				margin-bottom: 10px; /* Add margin between units */
+				padding: 10px; /* Add padding for spacing */
+				background-color: green;
+				opacity: 0.01;
+			}
+		}
+	}
+
+	.move_info {
+		position: absolute;
+		left: 0;
+		width: 30%;
+		height: 100%;
+		background-color: #444;
+		font-weight: bold;
+		border-radius: 20px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 20px; /* Add padding for spacing */
+
+		.description {
+			text-align: center;
+			flex-direction: column;
+			border-radius: 20px;
+			width: 500px;
+			height: 500px;
+			border: 1px solid #fff; /* Add solid border */
+			margin-bottom: 10px; /* Add margin between units */
+			padding: 10px; /* Add padding for spacing */
+			background-color: green;
+		}
+	}
+}

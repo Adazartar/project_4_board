@@ -13,7 +13,7 @@ public sealed class Board : Component
 	[Property] float cell_z = 2;
 
 	Cell active_cell = null;
-	Cell selected_cell = null;
+	public Cell selected_cell = null;
 
 	[Property] GameObject units;
 	List<Unit> unit_list = new List<Unit>();
@@ -40,9 +40,11 @@ public sealed class Board : Component
 		}
 	}
 
-	public void AddAction(TurnAction action)
+	public void AddActions(List<TurnAction> actions)
 	{
-		turn_actions.Add(action);
+		foreach(var action in actions){
+			turn_actions.Add(action);
+		}	
 	}
 
 	public void ExecuteTurn()
@@ -71,7 +73,7 @@ public sealed class Board : Component
 		foreach(var child in units.Children){
 			Unit unit;
 			if(child.Components.TryGet<Unit>(out unit)){
-				cells[(unit.start_x, unit.start_y)].UnitToCell(unit);
+				cells[(unit.start_x, unit.start_y)].MoveToCell(unit);
 				unit_list.Add(unit);
 				unit.board = this;
 			}

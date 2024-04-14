@@ -26,10 +26,21 @@ public sealed class Cell : Component
 
 	}
 
-	public void UnitToCell(Unit unit)
+	public void MoveToCell(Unit unit)
 	{
 		unit.GameObject.Transform.Position = Transform.Position;
 		units.Add(unit);
+		unit.cell = this;
+		unit.x = row_id;
+		unit.y = column_id;
+	}
+
+	public void LeaveCell(Unit unit)
+	{
+		unit.cell = null;
+		units.Remove(unit);
+		unit.x = -1;
+		unit.y = -1;
 	}
 
 	public void SetID(int row, int column){
@@ -54,13 +65,11 @@ public sealed class Cell : Component
 
 	public void Select(){
 		selected = true;
-		if(units.Count > 0) board.SetRangeIndicators(units[0].GetWeightedDiagonalCells(3));
 		SetCellBlue();
 	}
 
 	public void Unselect(){
 		selected = false;
-		if(units.Count > 0) board.UnsetRangeIndicators();
 		SetCellBaseColor();
 	}
 
