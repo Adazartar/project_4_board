@@ -1,6 +1,7 @@
 using Sandbox;
 using System;
 
+public delegate void TurnAction();
 public sealed class Board : Component
 {
 	[Property] int rows = 8;
@@ -14,19 +15,41 @@ public sealed class Board : Component
 	Cell active_cell = null;
 	Cell selected_cell = null;
 
-	[Property] Unit unit;
+	[Property] GameObject units;
+	List<Unit> unit_list = new List<Unit>();
 
 	public Dictionary<(int, int), Cell> cells = new Dictionary<(int, int), Cell>();
+
+	public List<TurnAction> turn_actions = new List<TurnAction>();
+
+	bool turn_executed = false;
 	protected override void OnStart()
 	{
 		CreateBoard();
 		InitialiseUnits();
+		ExecuteTurn();
 	}
 	
 	protected override void OnUpdate()
 	{
 		HoverCells();
 		SelectCells();
+		if(!turn_executed){
+			ExecuteTurn();
+			turn_executed = true;
+		}
+	}
+
+	public void AddAction(TurnAction action)
+	{
+		turn_actions.Add(action);
+	}
+
+	public void ExecuteTurn()
+	{
+		foreach(var action in turn_actions){
+			action();
+		}
 	}
 
 	public void CreateBoard(){
@@ -37,6 +60,7 @@ public sealed class Board : Component
 				GameObject new_cell = cell_piece.Clone(new Vector3(starting_point.x + j * gap, starting_point.y + i * gap, starting_point.z));
 				Cell cell_component = new_cell.Components.Get<Cell>();
 				cell_component.SetID(i, j);
+				cell_component.board = this;
 				cells[(i, j)] = cell_component;
 			}
 		}
@@ -44,7 +68,15 @@ public sealed class Board : Component
 
 	public void InitialiseUnits()
 	{
-		cells[(unit.start_row, unit.start_column)].UnitToCell(unit);
+		foreach(var child in units.Children){
+			Unit unit;
+			if(child.Components.TryGet<Unit>(out unit)){
+				cells[(unit.start_x, unit.start_y)].UnitToCell(unit);
+				unit_list.Add(unit);
+				unit.board = this;
+			}
+		}
+		
 	}
 
 	public void HoverCells(){
@@ -66,8 +98,7 @@ public sealed class Board : Component
 		if(Input.Down("interact")){
 			if(active_cell != null){
 				active_cell.Select();
-				// if(selected_cell != null) selected_cell.Unselect();
-				if(selected_cell != null) DrawLine(active_cell, selected_cell);
+				if(selected_cell != null) selected_cell.Unselect();
 				selected_cell = active_cell;
 				selected_cell.Select();
 			}
@@ -80,7 +111,9 @@ public sealed class Board : Component
 		}
 	}
 
-	public void DrawLine(Cell start_cell, Cell end_cell){
+	public List<Cell> DrawLine(Cell start_cell, Cell end_cell){
+		List<Cell> line = new List<Cell>();
+
 		int x0 = start_cell.row_id;
 		int y0 = start_cell.column_id;
 		int x1 = end_cell.row_id;
@@ -93,7 +126,7 @@ public sealed class Board : Component
 
         while (true)
         {
-			cells[(x0, y0)].SetCellRed();
+			line.Add(cells[(x0, y0)]);
             if (x0 == x1 && y0 == y1)
                 break;
 
@@ -109,5 +142,22 @@ public sealed class Board : Component
                 y0 += sy;
             }
         }
+		return line;
+	}
+
+	public void SetRangeIndicators(List<(int, int)> cell_coords)
+	{
+		foreach(var cell_coord in cell_coords){
+			if(cells.ContainsKey(cell_coord)){
+				cells[cell_coord].RangeIndicator();
+			}
+		}
+	}
+
+	public void UnsetRangeIndicators()
+	{
+		foreach(var kvp in cells){
+			cells[kvp.Key].UnRangeIndicator();
+		}
 	}
 }
